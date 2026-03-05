@@ -1,6 +1,6 @@
 # ferrum
 
-<img src="icon.png" alt="ferrum" width="128" />
+<img src="icon.png" alt="ferrum" width="512" />
 
 A terminal-based HTTP client. Think Postman, but in your terminal.
 
