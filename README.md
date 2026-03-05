@@ -34,12 +34,10 @@ Built with Rust and [ratatui](https://github.com/ratatui/ratatui).
 
 ## Install
 
-### From source (requires [Rust](https://rustup.rs))
+Ferrum is built from source using Rust. All platforms need [Rust](https://rustup.rs) installed first:
 
 ```bash
-git clone https://github.com/yourusername/ferrum
-cd ferrum
-cargo install --path .
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 The `ferrum` binary will be placed in `~/.cargo/bin/`. Make sure that's in your `PATH`:
@@ -49,18 +47,35 @@ The `ferrum` binary will be placed in `~/.cargo/bin/`. Make sure that's in your 
 export PATH="$HOME/.cargo/bin:$PATH"
 ```
 
-### Arch Linux / Omarchy
+### macOS
+
+No extra dependencies needed.
 
 ```bash
-# Install Rust if you don't have it
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Clone and install
-git clone https://github.com/yourusername/ferrum ~/Repos/ferrum
-cd ~/Repos/ferrum && cargo install --path .
+git clone https://github.com/yourusername/ferrum
+cd ferrum && cargo install --path .
 ```
 
-To open ferrum with a keybinding in Hyprland, add to `~/.config/hypr/userprefs.conf`:
+### Ubuntu / Debian
+
+```bash
+# Install build dependencies
+sudo apt install -y build-essential pkg-config libssl-dev
+
+git clone https://github.com/yourusername/ferrum
+cd ferrum && cargo install --path .
+```
+
+### Arch Linux
+
+```bash
+git clone https://github.com/yourusername/ferrum
+cd ferrum && cargo install --path .
+```
+
+#### Omarchy / Hyprland
+
+To open ferrum with a keybinding, add to `~/.config/hypr/userprefs.conf`:
 
 ```
 bind = $mainMod, F, exec, ghostty -e ferrum
@@ -69,7 +84,7 @@ bind = $mainMod, F, exec, ghostty -e ferrum
 ### Update
 
 ```bash
-cd ~/Repos/ferrum && git pull && cargo install --path . --force
+cd ferrum && git pull && cargo install --path . --force
 ```
 
 ## Usage
