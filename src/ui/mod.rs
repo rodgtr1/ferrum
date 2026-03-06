@@ -44,6 +44,15 @@ fn render_status_bar(f: &mut Frame, app: &App, area: Rect) {
         .map(|e| format!(" env:{} ", e.name))
         .unwrap_or_else(|| " no-env ".to_string());
 
+    let hints = match &app.focus {
+        crate::app::FocusPanel::Sidebar => "j/k nav  l/Enter open  n new-col  N new-req  dd delete",
+        crate::app::FocusPanel::RequestUrl => "i edit  Enter send  m method  Tab focus",
+        crate::app::FocusPanel::RequestMethod => "j/k cycle method  Enter/Esc confirm",
+        crate::app::FocusPanel::RequestTabs => "[ ] tabs  1-4 jump  o add-row  dd del-row  Space toggle",
+        crate::app::FocusPanel::RequestBody => "i edit  Esc save  Tab focus",
+        crate::app::FocusPanel::ResponsePanel => "j/k scroll  [ ] tabs",
+    };
+
     let line = Line::from(vec![
         Span::styled(mode, Style::default().fg(Color::Black).bg(if app.insert_mode { Color::Yellow } else { Color::Green }).add_modifier(Modifier::BOLD)),
         Span::raw(" "),
@@ -51,7 +60,8 @@ fn render_status_bar(f: &mut Frame, app: &App, area: Rect) {
         Span::raw("  "),
         Span::styled(env_label, Style::default().fg(Color::Magenta)),
         Span::raw("  "),
-        Span::styled("? help  q quit  Tab focus  e env", Style::default().fg(Color::DarkGray)),
+        Span::styled(hints, Style::default().fg(Color::DarkGray)),
+        Span::styled("  ? help  q quit  e env", Style::default().fg(Color::DarkGray)),
     ]);
 
     f.render_widget(Paragraph::new(line), area);
